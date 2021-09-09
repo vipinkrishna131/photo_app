@@ -1,23 +1,21 @@
-import 'package:bmi_calculator/Home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'Employee/employee_list_view.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'BMI Calculator',
+      title: 'Employee List',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      debugShowCheckedModeBanner: false,
+      home: EmployeeListView(),
     );
   }
 }

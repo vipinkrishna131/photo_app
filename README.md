@@ -1,4 +1,4 @@
-# bmi_calculator
+# employee_directory_application
 
 A new Flutter project.
 
