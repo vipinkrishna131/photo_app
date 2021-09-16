@@ -1,4 +1,4 @@
-# employee_directory_application
+# photo_app
 
 A new Flutter project.
 

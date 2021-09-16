@@ -1,4 +1,4 @@
-package com.example.employee_directory_application
+package com.example.photo_app
 
 import io.flutter.embedding.android.FlutterActivity
 

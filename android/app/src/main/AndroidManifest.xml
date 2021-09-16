@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.employee_directory_application">
+    package="com.example.photo_app">
    <application
-        android:label="employee_directory_application"
+        android:label="photo_app"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
