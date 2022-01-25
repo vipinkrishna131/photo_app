@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
-import 'package:photo_app/photo_detail.dart';
-import 'package:photo_app/photo_view_controller.dart';
+import 'package:photo_app/Common/global_values.dart';
+import 'package:photo_app/View/photo_detail.dart';
+import 'package:photo_app/Controller/photo_view_controller.dart';
 
 class PhotoListView extends StatelessWidget {
   final GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');
@@ -10,8 +10,9 @@ class PhotoListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double deviceHeight = MediaQuery.of(context).size.height;
-    double deviceWidth = MediaQuery.of(context).size.width;
+    var global = Get.put(GlobalValues(context));
+    double deviceHeight = global.deviceHeight;
+    double deviceWidth = global.deviceWidth;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -31,7 +32,7 @@ class PhotoListView extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                 ),
                 Image.asset(
-                  'assets/filter.png',
+                  'images/filter.png',
                   width: 20,
                   height: 20,
                   color: Colors.black,
@@ -71,8 +72,8 @@ class PhotoListView extends StatelessWidget {
                                   Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                                 Image.asset(
                                   photoViewController.categoryList[index].image,
-                                  width: 30,
-                                  height: 30,
+                                  width: deviceWidth * 0.08,
+                                  height: deviceHeight * 0.05,
                                   color: photoViewController.isSelected.value == index
                                       ? Colors.white
                                       : Colors.black,
@@ -126,7 +127,7 @@ class PhotoListView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 3, 0, 0),
                         child: Image.asset(
-                          'assets/arrow.png',
+                          'images/arrow.png',
                           width: 15,
                           height: 15,
                           color: Colors.black,
@@ -184,7 +185,7 @@ class PhotoListView extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Image.asset(
-                                              'assets/dollar.png',
+                                              'images/dollar.png',
                                               height: 20,
                                               width: 20,
                                             ),
@@ -197,7 +198,7 @@ class PhotoListView extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
                                             Image.asset(
-                                              'assets/star.png',
+                                              'images/star.png',
                                               height: 20,
                                               width: 20,
                                             ),
@@ -219,74 +220,9 @@ class PhotoListView extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        child: Image.asset(
-          'assets/bag.png',
-          width: 30,
-          height: 30,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
+      floatingActionButton: global.commonFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 5,
-        child: Container(
-          height: deviceHeight * 0.08,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Obx(() {
-                return IconButton(
-                    onPressed: () {
-                      photoViewController.toggleIndex(0);
-                    },
-                    icon: Icon(
-                      Icons.home,
-                      size: 30,
-                      color: photoViewController.indexValue.value == 0 ? Colors.black : Colors.grey,
-                    ));
-              }),
-              Obx(() {
-                return IconButton(
-                    onPressed: () {
-                      photoViewController.toggleIndex(1);
-                    },
-                    icon: Icon(
-                      Icons.search,
-                      size: 30,
-                      color: photoViewController.indexValue.value == 1 ? Colors.black : Colors.grey,
-                    ));
-              }),
-              Obx(() {
-                return IconButton(
-                    onPressed: () {
-                      photoViewController.toggleIndex(2);
-                    },
-                    icon: Icon(
-                      Icons.settings,
-                      size: 30,
-                      color: photoViewController.indexValue.value == 2 ? Colors.black : Colors.grey,
-                    ));
-              }),
-              Obx(() {
-                return IconButton(
-                    onPressed: () {
-                      photoViewController.toggleIndex(3);
-                    },
-                    icon: Image.asset(
-                      'assets/avatar.png',
-                      width: 30,
-                      height: 30,
-                      color: photoViewController.indexValue.value == 3 ? Colors.black : Colors.grey,
-                    ));
-              }),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: global.commonBottomAppBar(),
     );
   }
 }

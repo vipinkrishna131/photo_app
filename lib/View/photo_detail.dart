@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:photo_app/photo_view_controller.dart';
+import 'package:photo_app/Common/global_values.dart';
+import 'package:photo_app/Controller/photo_view_controller.dart';
 
 class PhotoDetail extends StatelessWidget {
   final PhotoViewController photoViewController = Get.find();
-
   @override
   Widget build(BuildContext context) {
-    double deviceHeight = MediaQuery.of(context).size.height;
-    double deviceWidth = MediaQuery.of(context).size.width;
+    GlobalValues globalValues = Get.find();
+    double deviceHeight = globalValues.deviceHeight;
+    double deviceWidth = globalValues.deviceWidth;
 
     return Scaffold(
       body: Stack(
@@ -17,12 +18,12 @@ class PhotoDetail extends StatelessWidget {
             height: deviceHeight * 0.88,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: Image.asset('assets/chair_detail.png').image, fit: BoxFit.cover),
+                  image: Image.asset('images/chair_detail.png').image, fit: BoxFit.cover),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.zero,
                   topRight: Radius.zero,
-                  bottomLeft: Radius.circular(50),
-                  bottomRight: Radius.circular(50)),
+                  bottomLeft: Radius.circular(deviceWidth * 0.13),
+                  bottomRight: Radius.circular(deviceWidth * 0.13)),
             ),
           ),
           Column(
@@ -36,9 +37,9 @@ class PhotoDetail extends StatelessWidget {
                         width: deviceWidth * 0.03,
                       ),
                       Image.asset(
-                        'assets/camera.png',
-                        height: 30,
-                        width: 30,
+                        'images/camera.png',
+                        height: deviceHeight * 0.03,
+                        width: deviceWidth * 0.07,
                         color: Colors.white,
                       ),
                       SizedBox(
@@ -94,15 +95,15 @@ class PhotoDetail extends StatelessWidget {
                       child: Stack(
                         children: [
                           Container(
-                            width: 40,
-                            height: 40,
+                            width: deviceWidth * 0.11,
+                            height: deviceHeight * 0.11,
                             decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                           ),
                           Positioned.fill(
                             child: Align(
                               alignment: Alignment.center,
                               child: Image.asset(
-                                'assets/multiply.png',
+                                'images/multiply.png',
                                 height: 20,
                                 width: 20,
                               ),
@@ -131,8 +132,8 @@ class PhotoDetail extends StatelessWidget {
                   child: Stack(
                     children: [
                       Container(
-                        width: 40,
-                        height: 40,
+                        width: deviceWidth * 0.1,
+                        height: deviceHeight * 0.05,
                         decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                       ),
                       Positioned.fill(
@@ -155,8 +156,8 @@ class PhotoDetail extends StatelessWidget {
                   child: Stack(
                     children: [
                       Container(
-                        width: 40,
-                        height: 40,
+                        width: deviceWidth * 0.1,
+                        height: deviceHeight * 0.05,
                         decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                       ),
                       Positioned.fill(
@@ -180,7 +181,7 @@ class PhotoDetail extends StatelessWidget {
                 child: Row(
                   children: [
                     Image.asset(
-                      'assets/chair1.png',
+                      'images/chair1.png',
                       height: deviceWidth * 0.25,
                       width: deviceWidth * 0.25,
                     ),
@@ -202,7 +203,7 @@ class PhotoDetail extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Image.asset(
-                                    'assets/star.png',
+                                    'images/star.png',
                                     height: 20,
                                     width: 20,
                                   ),
@@ -222,7 +223,7 @@ class PhotoDetail extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Image.asset(
-                                    'assets/dollar.png',
+                                    'images/dollar.png',
                                     height: 20,
                                     width: 20,
                                   ),
@@ -242,15 +243,15 @@ class PhotoDetail extends StatelessWidget {
                       child: Stack(
                         children: [
                           Container(
-                            width: 40,
-                            height: 40,
+                            width: deviceWidth * 0.1,
+                            height: deviceHeight * 0.5,
                             decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                           ),
                           Positioned.fill(
                             child: Align(
                               alignment: Alignment.center,
                               child: Image.asset(
-                                'assets/chevronRight.png',
+                                'images/chevronRight.png',
                                 height: 20,
                                 width: 20,
                               ),
@@ -266,74 +267,9 @@ class PhotoDetail extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        child: Image.asset(
-          'assets/bag.png',
-          width: 30,
-          height: 30,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
+      floatingActionButton: globalValues.commonFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 5,
-        child: Container(
-          height: deviceHeight * 0.08,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Obx(() {
-                return IconButton(
-                    onPressed: () {
-                      photoViewController.toggleIndex(0);
-                    },
-                    icon: Icon(
-                      Icons.home,
-                      size: 30,
-                      color: photoViewController.indexValue.value == 0 ? Colors.black : Colors.grey,
-                    ));
-              }),
-              Obx(() {
-                return IconButton(
-                    onPressed: () {
-                      photoViewController.toggleIndex(1);
-                    },
-                    icon: Icon(
-                      Icons.search,
-                      size: 30,
-                      color: photoViewController.indexValue.value == 1 ? Colors.black : Colors.grey,
-                    ));
-              }),
-              Obx(() {
-                return IconButton(
-                    onPressed: () {
-                      photoViewController.toggleIndex(2);
-                    },
-                    icon: Icon(
-                      Icons.settings,
-                      size: 30,
-                      color: photoViewController.indexValue.value == 2 ? Colors.black : Colors.grey,
-                    ));
-              }),
-              Obx(() {
-                return IconButton(
-                    onPressed: () {
-                      photoViewController.toggleIndex(3);
-                    },
-                    icon: Image.asset(
-                      'assets/avatar.png',
-                      width: 30,
-                      height: 30,
-                      color: photoViewController.indexValue.value == 3 ? Colors.black : Colors.grey,
-                    ));
-              }),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: globalValues.commonBottomAppBar(),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:photo_app/photo_list_view.dart';
+import 'package:photo_app/View/photo_list_view.dart';
 
 void main() {
   runApp(MyApp());
