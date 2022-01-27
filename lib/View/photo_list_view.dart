@@ -6,13 +6,13 @@ import 'package:photo_app/Controller/photo_view_controller.dart';
 
 class PhotoListView extends StatelessWidget {
   final GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');
+
   final PhotoViewController photoViewController = Get.put(PhotoViewController());
 
   @override
   Widget build(BuildContext context) {
-    var global = Get.put(GlobalValues(context));
-    double deviceHeight = global.deviceHeight;
-    double deviceWidth = global.deviceWidth;
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -220,9 +220,10 @@ class PhotoListView extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: global.commonFloatingActionButton(),
+      floatingActionButton: GlobalValues.commonFloatingActionButton(deviceHeight, deviceWidth),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: global.commonBottomAppBar(),
+      bottomNavigationBar:
+          GlobalValues.commonBottomAppBar(photoViewController, deviceHeight, deviceWidth),
     );
   }
 }

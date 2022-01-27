@@ -2,18 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_app/Controller/photo_view_controller.dart';
 
-class GlobalValues extends GetxController {
-  BuildContext buildContext;
-  double deviceHeight, deviceWidth;
-  final PhotoViewController photoViewController = Get.find();
-
-  GlobalValues(BuildContext context) {
-    buildContext = context;
-    deviceHeight = MediaQuery.of(buildContext).size.height;
-    deviceWidth = MediaQuery.of(buildContext).size.width;
-  }
-
-  commonFloatingActionButton() {
+class GlobalValues {
+  static commonFloatingActionButton(double deviceHeight, double deviceWidth) {
     return FloatingActionButton(
       backgroundColor: Colors.black,
       child: Image.asset(
@@ -26,7 +16,8 @@ class GlobalValues extends GetxController {
     );
   }
 
-  commonBottomAppBar() {
+  static commonBottomAppBar(
+      PhotoViewController photoViewController, double deviceHeight, double deviceWidth) {
     return BottomAppBar(
       shape: CircularNotchedRectangle(),
       notchMargin: 5,

@@ -7,9 +7,8 @@ class PhotoDetail extends StatelessWidget {
   final PhotoViewController photoViewController = Get.find();
   @override
   Widget build(BuildContext context) {
-    GlobalValues globalValues = Get.find();
-    double deviceHeight = globalValues.deviceHeight;
-    double deviceWidth = globalValues.deviceWidth;
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Stack(
@@ -267,9 +266,10 @@ class PhotoDetail extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: globalValues.commonFloatingActionButton(),
+      floatingActionButton: GlobalValues.commonFloatingActionButton(deviceHeight, deviceWidth),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: globalValues.commonBottomAppBar(),
+      bottomNavigationBar:
+          GlobalValues.commonBottomAppBar(photoViewController, deviceHeight, deviceWidth),
     );
   }
 }
